@@ -10,7 +10,7 @@ use App\DataFixtures\IngredientFixtures;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
-class CategoryDrinkFixtures extends Fixture implements DependentFixtureInterface
+class CategoryDrinkFixtures extends Fixture
 {
     public const CATEGORYDRINK = [
         'Smoothie',
@@ -31,14 +31,5 @@ class CategoryDrinkFixtures extends Fixture implements DependentFixtureInterface
         }
 
         $manager->flush();
-    }
-
-    public function getDependencies()
-    {
-        return [
-            DrinkFixtures::class,
-            BenefitFixtures::class,
-            IngredientFixtures::class,
-        ];
     }
 }

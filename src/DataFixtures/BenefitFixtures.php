@@ -10,7 +10,7 @@ use App\DataFixtures\CategoryDrinkFixtures;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
-class BenefitFixtures extends Fixture implements DependentFixtureInterface
+class BenefitFixtures extends Fixture
 {
     public const BENEFIT = [
         'Tonicité',
@@ -25,19 +25,10 @@ class BenefitFixtures extends Fixture implements DependentFixtureInterface
     {
         foreach (self::BENEFIT as $benefitName) {
             $benefit = new Benefit();
-            $benefit->setName($benefitName[0]);
-            $this->addReference($benefitName[0], $benefit);
+            $benefit->setName($benefitName);
+            $this->addReference($benefitName, $benefit);
             $manager->persist($benefit);
         }
         $manager->flush();
-    }
-
-    public function getDependencies()
-    {
-        return [
-            IngredientFixtures::class,
-            DrinkFixtures::class,
-            CategoryDrinkFixtures::class,
-        ];
     }
 }
