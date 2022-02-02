@@ -1,0 +1,29 @@
+<?php
+
+namespace App\Form;
+
+use App\Entity\Drink;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+class DrinkType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+            ->add('name')
+            ->add('image')
+            ->add('description')
+            ->add('ingredients')
+            ->add('categoryDrink')
+        ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => Drink::class,
+        ]);
+    }
+}
