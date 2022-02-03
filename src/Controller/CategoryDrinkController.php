@@ -17,7 +17,7 @@ class CategoryDrinkController extends AbstractController
     #[Route('/', name: 'category_drink_index', methods: ['GET'])]
     public function index(CategoryDrinkRepository $categoryDrinkRepository): Response
     {
-        return $this->render('category_drink/index.html.twig', [
+        return $this->render('admin/category_drink/index.html.twig', [
             'category_drinks' => $categoryDrinkRepository->findAll(),
         ]);
     }
@@ -36,7 +36,7 @@ class CategoryDrinkController extends AbstractController
             return $this->redirectToRoute('category_drink_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('category_drink/new.html.twig', [
+        return $this->renderForm('admin/category_drink/new.html.twig', [
             'category_drink' => $categoryDrink,
             'form' => $form,
         ]);
@@ -45,7 +45,7 @@ class CategoryDrinkController extends AbstractController
     #[Route('/{id}', name: 'category_drink_show', methods: ['GET'])]
     public function show(CategoryDrink $categoryDrink): Response
     {
-        return $this->render('category_drink/show.html.twig', [
+        return $this->render('admin/category_drink/show.html.twig', [
             'category_drink' => $categoryDrink,
         ]);
     }
@@ -62,7 +62,7 @@ class CategoryDrinkController extends AbstractController
             return $this->redirectToRoute('category_drink_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('category_drink/edit.html.twig', [
+        return $this->renderForm('admin/category_drink/edit.html.twig', [
             'category_drink' => $categoryDrink,
             'form' => $form,
         ]);
@@ -71,7 +71,7 @@ class CategoryDrinkController extends AbstractController
     #[Route('/{id}', name: 'category_drink_delete', methods: ['POST'])]
     public function delete(Request $request, CategoryDrink $categoryDrink, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$categoryDrink->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $categoryDrink->getId(), $request->request->get('_token'))) {
             $entityManager->remove($categoryDrink);
             $entityManager->flush();
         }

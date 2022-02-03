@@ -12,10 +12,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-#[Route('/drink')]
 class DrinkController extends AbstractController
 {
-    #[Route('/', name: 'drink_index', methods: ['GET', 'POST'])]
+    #[Route('/drink', name: 'drink_index', methods: ['GET', 'POST'])]
     public function index(Request $request, DrinkRepository $drinkRepository): Response
     {
         $form = $this->createForm(SearchDrinkType::class);
@@ -28,13 +27,32 @@ class DrinkController extends AbstractController
             $drinks = $drinkRepository->findAll();
         }
 
-        return $this->render('drink/index.html.twig', [
+        return $this->render('user/drink/index.html.twig', [
             'drinks' => $drinks,
             'form' => $form->createView(),
         ]);
     }
 
-    #[Route('/new', name: 'drink_new', methods: ['GET', 'POST'])]
+    #[Route('/admin/drink', name: 'drink_index_admin', methods: ['GET', 'POST'])]
+    public function indexAdmin(Request $request, DrinkRepository $drinkRepository): Response
+    {
+        $form = $this->createForm(SearchDrinkType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $search = $form->getData()['search'];
+            $drinks = $drinkRepository->findBy(['name' => $search]);
+        } else {
+            $drinks = $drinkRepository->findAll();
+        }
+
+        return $this->render('admin/drink/index.html.twig', [
+            'drinks' => $drinks,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('admin/drink/new', name: 'drink_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $drink = new Drink();
@@ -48,21 +66,21 @@ class DrinkController extends AbstractController
             return $this->redirectToRoute('drink_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('drink/new.html.twig', [
+        return $this->renderForm('admin/drink/new.html.twig', [
             'drink' => $drink,
             'form' => $form,
         ]);
     }
 
-    #[Route('/{id}', name: 'drink_show', methods: ['GET'])]
+    #[Route('drink/{id}', name: 'drink_show', methods: ['GET'])]
     public function show(Drink $drink): Response
     {
-        return $this->render('drink/show.html.twig', [
+        return $this->render('user/drink/show.html.twig', [
             'drink' => $drink,
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'drink_edit', methods: ['GET', 'POST'])]
+    #[Route('admin/drink/{id}/edit', name: 'drink_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Drink $drink, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(DrinkType::class, $drink);
@@ -74,13 +92,13 @@ class DrinkController extends AbstractController
             return $this->redirectToRoute('drink_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('drink/edit.html.twig', [
+        return $this->renderForm('admin/drink/edit.html.twig', [
             'drink' => $drink,
             'form' => $form,
         ]);
     }
 
-    #[Route('/{id}', name: 'drink_delete', methods: ['POST'])]
+    #[Route('admin/drink/{id}', name: 'drink_delete', methods: ['POST'])]
     public function delete(Request $request, Drink $drink, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $drink->getId(), $request->request->get('_token'))) {

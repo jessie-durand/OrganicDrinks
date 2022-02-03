@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello Admin !{% endblock %}
+
+{% block body %}
+{% include '/admin/adminBase.html.twig' %}
+
+<div class="container-tableau">
+    <table>
+        <thead>
+            <tr>
+                <th class="datas-form-big">Bienfait</th>
+                <th class="datas-form-big">Image</th>
+                <th class="datas-form-small">Description</th>
+                <th class="datas-form-small">Ingrédient</th>
+            </tr>
+        </thead>
+            {% for benefit in benefits %}
+                <tr>
+                    <td class="datas-form-big">{{ benefit.name|title }}</td>
+                    <td class="datas-form-big"><img class="align-self-start mr-3" src="{{benefit.image}}" alt="{{ benefit.name }} poster"></td>
+                    <td class="datas-form-big">{{ benefit.description }}</td>
+                    <td class="datas-form-big">
+                    {% for ingredient in benefit.ingredients %}
+                        {{ ingredient.name }}
+                    {% endfor %}
+                    </td>
+                     <td class="datas-form-small">
+                        <a href="{{ path('benefit_show', {'id': benefit.id}) }}"><i class="fas fa-eye"></i></a>
+                    </td>
+                    <td class="datas-form-small">
+                        <a href="{{ path('benefit_edit', {'id': benefit.id}) }}"><i class="fas fa-pen"></i></a>
+                    </td>
+                    <td class="datas-form-small">
+                        {{ include('/admin/benefit/_delete_form.html.twig') }}</span>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">Aucun élément dans la base de données.</td>
+                </tr>
+            {% endfor %}
+    </table>
+    </div>
+
+    <center>
+        <a class="btn-admin" href="{{ path('benefit_new') }}">Ajouter un bienfait</a>
+    </center>
+
+        <div class="btn-retour">
+            <a class="btn-admin" href="{{ path('admin') }}">Retour</a>
+        </div>
+</div>
+
+{% endblock %}

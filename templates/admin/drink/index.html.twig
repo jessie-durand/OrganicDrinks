@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello Admin!{% endblock %}
+
+{% block body %}
+{% include '/admin/adminBase.html.twig' %}
+
+<div class="container-tableau">
+    <table>
+        <thead>
+            <tr>
+                <th class="datas-form-big">Boisson</th>
+                <th class="datas-form-big">Image</th>
+                <th class="datas-form-small">Description</th>
+                <th class="datas-form-small">Ingrédient</th>
+            </tr>
+        </thead>
+            {% for drink in drinks %}
+                <tr>
+                    <td class="datas-form-big">{{ drink.name|title }}</td>
+                    <td class="datas-form-big"><img class="imgAdmin" src="{{drink.image}}" alt="{{ drink.name }} poster"></td>
+                    <td class="datas-form-big">{{ drink.description }}</td>
+                    <td class="datas-form-big">
+                    {% for ingredient in drink.ingredients %}
+                        {{ ingredient.name }}
+                    {% endfor %}
+                    </td>
+                     <td class="datas-form-small">
+                        <a href="{{ path('drink_show', {'id': drink.id}) }}"><i class="fas fa-eye"></i></a>
+                    </td>
+                    <td class="datas-form-small">
+                        <a href="{{ path('drink_edit', {'id': drink.id}) }}"><i class="fas fa-pen"></i></a>
+                    </td>
+                    <td class="datas-form-small">
+                        {{ include('/admin/drink/_delete_form.html.twig') }}</span>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">Aucun élément dans la base de données.</td>
+                </tr>
+            {% endfor %}
+    </table>
+    </div>
+
+    <center>
+        <a class="btn-admin" href="{{ path('ingredient_new') }}">Ajouter une boisson</a>
+    </center>
+
+        <div class="btn-retour">
+            <a class="btn-admin" href="{{ path('admin') }}">Retour</a>
+        </div>
+</div>
+
+{% endblock %}

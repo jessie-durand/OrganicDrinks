@@ -1,0 +1,13 @@
+{% block header %}
+<img id="logo-login" src="/build/images/logo2.png">
+    <nav id="navBar">
+        <ul id="navUser">
+            <li><a href="{{ path('home') }}">Voir le site</a></li>
+            <li><a href="{{ path('admin') }}">Accueil</a></li>
+            <li><a href="{{ path('ingredient_index_admin')}}">Ingrédients</a></li>
+            <li><a href="{{ path('drink_index_admin')}}">Boissons</a></li>
+            <li><a href="{{ path('benefit_index_admin')}}">Bienfaits</a></li>
+            <li><a href="">Déconnexion</a></li>
+        </ul>
+    </nav>
+{% endblock %}

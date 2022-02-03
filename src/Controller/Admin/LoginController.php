@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,7 +11,7 @@ class LoginController extends AbstractController
 {
     /**
      * Login de connexion avec vérification
-     * @Route("admin/login", name="admin_login")
+     * @Route("admin/login", name="login")
      */
 
     public function index(AuthenticationUtils $authenticationUtils): Response

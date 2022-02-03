@@ -5,9 +5,9 @@
 {% block body %}
     <h1>Edit Benefit</h1>
 
-    {{ include('benefit/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('admin/benefit/_form.html.twig', {'button_label': 'Update'}) }}
 
     <a href="{{ path('benefit_index') }}">back to list</a>
 
-    {{ include('benefit/_delete_form.html.twig') }}
+    {{ include('admin/benefit/_delete_form.html.twig') }}
 {% endblock %}

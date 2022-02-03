@@ -1,20 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AdminController!{% endblock %}
+{% block title %}Hello Admin !{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/jessi/Documents/wildCodeSchool/checkpoint/checkpoint4/OrganicDrinks/src/Controller/AdminController.php'|file_link(0) }}">src/Controller/AdminController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/jessi/Documents/wildCodeSchool/checkpoint/checkpoint4/OrganicDrinks/templates/admin/index.html.twig'|file_link(0) }}">templates/admin/index.html.twig</a></code></li>
-    </ul>
+{% include '/admin/adminBase.html.twig' %}
+<div class="">
+    <div class="videoHome">
+        <img src="https://i.pinimg.com/originals/c6/34/b6/c634b6418e93d2cc0c98ed02338019c5.gif" alt="thé">
+        </div>
 </div>
+
 {% endblock %}
