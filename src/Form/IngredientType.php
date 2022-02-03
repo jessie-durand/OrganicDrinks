@@ -39,22 +39,17 @@ class IngredientType extends AbstractType
             ->add('image')
             ->add('description')
 
-            // ->add('benefits', EntityType::class, [
-            //     'choices' => $this->filtreService->filtreBenefit($options['ingredient']),
-            //     'label' => ' ',
-            //     'class' => Benefit::class,
-            //     'choice_label' => 'name',
-            //     'placeholder' => "Veuillez choisir un bienfait", l
-            // ])
+            ->add('benefits',  null, [
+                'choice_label' => 'name',
+                'expanded' => true,
+                'multiple' => true,
+            ])
 
-            // ->add('drinks', EntityType::class, [
-            //     'choices' => $this->filtreService->filtreDrink($options['ingredient']),
-            //     'label' => ' ',
-            //     'class' => Drink::class,
-            //     'choice_label' => 'name',
-            //     'placeholder' => "Veuillez choisir une boisson",
-            // ])
-        ;
+            ->add('drinks', null, [
+                'choice_label' => 'name',
+                'expanded' => true,
+                'multiple' => true,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

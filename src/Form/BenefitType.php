@@ -15,8 +15,11 @@ class BenefitType extends AbstractType
             ->add('name')
             ->add('image')
             ->add('description')
-            // ->add('ingredients')
-        ;
+            ->add('ingredients', null, [
+                'choice_label' => 'name',
+                'expanded' => true,
+                'multiple' => true,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
