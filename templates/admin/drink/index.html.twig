@@ -10,7 +10,6 @@
         <thead>
             <tr>
                 <th class="datas-form-big">Boisson</th>
-                <th class="datas-form-big">Image</th>
                 <th class="datas-form-small">Description</th>
                 <th class="datas-form-small">Ingrédient</th>
             </tr>
@@ -18,8 +17,7 @@
             {% for drink in drinks %}
                 <tr>
                     <td class="datas-form-big">{{ drink.name|title }}</td>
-                    <td class="datas-form-big"><img class="imgAdmin" src="{{drink.image}}" alt="{{ drink.name }} poster"></td>
-                    <td class="datas-form-big">{{ drink.description }}</td>
+                    <td class="datas-form-big">{{ drink.description|slice (0, 200) }}</td>
                     <td class="datas-form-big">
                     {% for ingredient in drink.ingredients %}
                         {{ ingredient.name }}

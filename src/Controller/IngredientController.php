@@ -89,8 +89,9 @@ class IngredientController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('ingredient_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('ingredient_index_admin', [], Response::HTTP_SEE_OTHER);
         }
+
 
         return $this->renderForm('admin/ingredient/edit.html.twig', [
             'ingredient' => $ingredient,
