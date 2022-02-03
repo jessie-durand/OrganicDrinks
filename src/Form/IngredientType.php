@@ -2,9 +2,10 @@
 
 namespace App\Form;
 
-use App\Service\FiltreService;
+use App\Entity\Drink;
 use App\Entity\Benefit;
 use App\Entity\Ingredient;
+use App\Service\FiltreService;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -37,20 +38,21 @@ class IngredientType extends AbstractType
             )
             ->add('image')
             ->add('description')
+
             // ->add('benefits', EntityType::class, [
-            //     'choices' => $this->filtreService->filtreBenefit(),
+            //     'choices' => $this->filtreService->filtreBenefit($options['ingredient']),
             //     'label' => ' ',
             //     'class' => Benefit::class,
             //     'choice_label' => 'name',
-            //     'placeholder' => "Veuillez choisir un bienfait",
+            //     'placeholder' => "Veuillez choisir un bienfait", l
             // ])
 
             // ->add('drinks', EntityType::class, [
-            // 'choices' => $this->filtreService->filtreDrink(),
-            // 'label' => ' ',
-            // 'class' => Drink::class,
-            // 'choice_label' => 'name',
-            // 'placeholder' => "Veuillez choisir une boisson",
+            //     'choices' => $this->filtreService->filtreDrink($options['ingredient']),
+            //     'label' => ' ',
+            //     'class' => Drink::class,
+            //     'choice_label' => 'name',
+            //     'placeholder' => "Veuillez choisir une boisson",
             // ])
         ;
     }
@@ -59,14 +61,7 @@ class IngredientType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Ingredient::class,
+            'ingredient' => '',
         ]);
     }
 }
-
-// ->add('organe', EntityType::class, [
-//     'choices' => $this->filtreService->organesUser(),
-//     'label' => ' ',
-//     'class' => Organe::class,
-//     'choice_label' => 'name',
-//     'placeholder' => 'Veuillez choisir un organe',
-// ])

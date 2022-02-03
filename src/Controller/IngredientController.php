@@ -84,7 +84,8 @@ class IngredientController extends AbstractController
     #[Route('admin/ingredient/{id}/edit', name: 'ingredient_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Ingredient $ingredient, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(IngredientType::class, $ingredient);
+
+        $form = $this->createForm(IngredientType::class, $ingredient, ["ingredient" => $ingredient]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

@@ -3,6 +3,8 @@
 {% block title %}Modifier {{ ingredient.name }}{% endblock %}
 
 {% block body %}
+ {% if is_granted("ROLE_ADMIN") %}
+
     <h1>Modifier {{ ingredient.name }}</h1>
 
     {{ include('admin/ingredient/_form.html.twig', {'button_label': 'Update'}) }}
@@ -10,4 +12,7 @@
     <a href="{{ path('ingredient_index') }}">Retour</a>
 
     {{ include('admin/ingredient/_delete_form.html.twig') }}
+{% else %}
+<p> Vous devez être administrateur pour voir ce contenu ! </p>
+{% endif %}
 {% endblock %}

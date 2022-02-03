@@ -3,6 +3,7 @@
 {% block title %}Hello Admin !{% endblock %}
 
 {% block body %}
+ {% if is_granted("ROLE_ADMIN") %}
 {% include '/admin/adminBase.html.twig' %}
 
 <div class="container-tableau">
@@ -18,7 +19,7 @@
             {% for ingredient in ingredients %}
                 <tr>
                     <td class="datas-form-big">{{ ingredient.name|title }}</td>
-                    <td class="datas-form-big">{{ ingredient.description|slice (0, 200) }} ...</td>
+                    <td class="datas-form-big">{{ ingredient.description|slice (0, 100) }} ...</td>
                     <td class="datas-form-big">
                     {% for drink in ingredient.drinks %}
                         {{ drink.name }}
@@ -55,5 +56,7 @@
             <a class="btn-admin" href="{{ path('admin') }}">Retour</a>
         </div>
 </div>
-
+{% else %}
+<p> Vous devez être administrateur pour voir ce contenu ! </p>
+{% endif %}
 {% endblock %}

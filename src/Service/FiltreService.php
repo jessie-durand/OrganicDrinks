@@ -9,22 +9,13 @@ class FiltreService extends AbstractController
 {
     public function filtreBenefit(Ingredient $ingredient)
     {
-        $benefits = [];
 
-        foreach ($ingredient->getBenefits() as $b) {
-            $benefits[] = $b->getName();
-        }
-
-        return $benefits;
+        return $ingredient->getBenefits();
     }
 
 
     public function filtreDrink(Ingredient $ingredient)
     {
-        $drinks = [];
-
-        foreach ($ingredient->getDrinks() as $d) {
-            $drinks[] = $d->getName();
-        }
+        return $ingredient->getDrinks();
     }
 }

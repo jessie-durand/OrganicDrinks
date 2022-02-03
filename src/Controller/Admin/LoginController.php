@@ -11,7 +11,7 @@ class LoginController extends AbstractController
 {
     /**
      * Login de connexion avec vérification
-     * @Route("admin/login", name="login")
+     * @Route("/login", name="login")
      */
 
     public function index(AuthenticationUtils $authenticationUtils): Response

@@ -3,9 +3,14 @@
 {% block title %}New Drink{% endblock %}
 
 {% block body %}
+ {% if is_granted("ROLE_ADMIN") %}
     <h1>Create new Drink</h1>
 
     {{ include('admin/drink/_form.html.twig') }}
 
-    <a href="{{ path('drink_index') }}">back to list</a>
+    <a href="{{ path('drink_index') }}">Retour</a>
+{% else %}
+<p> Vous devez être administrateur pour voir ce contenu ! </p>
+{% endif %}
+
 {% endblock %}

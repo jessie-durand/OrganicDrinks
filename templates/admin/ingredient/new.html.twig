@@ -3,9 +3,14 @@
 {% block title %}New Ingredient{% endblock %}
 
 {% block body %}
+ {% if is_granted("ROLE_ADMIN") %}
     <h1>Create new Ingredient</h1>
 
     {{ include('admin/ingredient/_form.html.twig') }}
 
     <a href="{{ path('ingredient_index') }}">back to list</a>
+{% else %}
+<p> Vous devez être administrateur pour voir ce contenu ! </p>
+{% endif %}
+
 {% endblock %}

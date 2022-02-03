@@ -8,20 +8,66 @@ body {
 #navUser  {
    display:flex;
    justify-content: space-around;
+   border-bottom: 1px solid black;
+   margin-left:4%;
+   margin-right:4%;
+
 }
 
 #navUser li {
     list-style: none;
-    text-decoration: none;
+    font-size:25px;
+    margin-bottom:2%;
 }
 
 #navUser li a{
     cursor:pointer;
     text-decoration: none;
+    color:black;
+    position: relative;
+    transition: all 1s;
+    overflow: hidden;
 }
+
+#navUser a:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    transform: translateX(-50%);
+    transition: all 1s;
+}
+
+#navUser a:hover:before {
+    transform: translateX(0);
+    border-bottom : 1px dashed rgb(226, 226, 219);
+  }
+
+#navUser a:hover {
+    color: rgb(226, 226, 219);
+    font-weight:bold;
+  }
+
 
 #logo-login {
     width:300px;
+}
+
+/* CSS DU LOGIN */
+
+#logo-login2 {
+    width:600px;
+}
+
+/* CSS des btns  */
+
+
+#form-login input {
+   width: 20%;
+
 }
 
 /* CSS du footer user  */
@@ -31,16 +77,33 @@ body {
     justify-content: flex-end;
     gap:80px;
     margin:2%;
+    border-top: 1px solid black;
+    margin-left:4%;
+    margin-right:4%;
  }
 
 #footerUser li {
      list-style: none;
      text-decoration: none;
+     margin-top:2%;
  }
 
 #footerUser li a{
      cursor:pointer;
+     color: black;
+     font-size:20px;
+     text-decoration: none;
  }
+
+ #footerUser li a:hover {
+    color: rgb(226, 226, 219);
+    font-weight:bold;
+ }
+
+ .footer p {
+    color:grey;
+}
+
 
  /* CSS des barres de recherches  */
 
@@ -128,6 +191,71 @@ h2, h1, p {
     transition: all 1s;
 }
 
+/* CSS ingredient show  */
+
+.ingredientShow {
+    display:flex;
+    justify-content: space-around;
+    margin: 5%;
+}
+
+.media img {
+height: 100px;
+width: 100px;
+object-fit: cover;
+}
+
+.showBody {
+    display:flex;
+    flex-direction:row;
+    justify-content: space-around;
+    gap:30px;
+
+}
+
+.showBody a {
+    font-size : 15px;
+    color: rgb(245, 240, 227);
+    text-decoration: none;
+}
+
+.showBody a:hover {
+    text-decoration: underline;
+    color: rgb(122, 121, 202);
+}
+
+.text {
+    width: 70%;
+    text-align:center;
+
+}
+
+.liens {
+    width:30%;
+}
+
+.liens p {
+    text-align: center;
+}
+
+.liens li {
+    border: 3px solid rgb(122, 121, 202);
+    list-style: none;
+    text-align: center;
+    padding: 2%;
+}
+
+.liens li a {
+  color: rgb(245, 240, 227);
+  text-decoration: none;
+  width:70%;
+}
+
+.liens li:hover{
+   background-color: rgb(122, 121, 202);
+   cursor:pointer;
+}
+
 /* CSS de la page drink index */
 
 .lesdrinks {
@@ -193,3 +321,14 @@ h2, h1, p {
 /* CSS DES PAGES ADMIN */
 
 /* CSS des tableaux index  */
+
+.container-tableau {
+    margin: 25px 0 25px 0;
+    min-height: 30vh;
+    max-height: 50vh;
+    min-width: 40vh;
+    overflow-y: scroll;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }

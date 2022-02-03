@@ -9,36 +9,41 @@
 
 	<div id="div-login">
         <div>
-            <img id="logo-login" src="/build/images/logo.png">
+            <center>
+                <img id="logo-login2" src="/images/logo.png">
+            </center>
         </div>
 
 		<h1 id="titre-login">
 			Connexion
 		</h1>
 
-		<form id="form-login" action="{{ path('login') }}" method="post">
-            <div>
-			    <input
-                    id="email"
-                    class="input-form"
-                    type="text"
-                    name="_email"
-                    placeholder="E-mail"
-                />
-            </div>
+        <center>
+            <form id="form-login" action="{{ path('login') }}" method="post">
+                <div>
+                    <input
+                        id="username"
+                        class="input-form"
+                        type="text"
+                        name="_username"
+                        value="{{ last_username }}"
+                        placeholder="E-mail"
+                    />
+                </div>
 
-            <div>
-                <input class="input-form"
-                    id="password"
-                    type="password"
-                    name="_password"
-                    placeholder="Mot de passe"
-                />
-            </div>
+                <div>
+                    <input class="input-form"
+                        id="password"
+                        type="password"
+                        name="_password"
+                        placeholder="Mot de passe"
+                    />
+                </div>
 
-			<input type="hidden" name="_target_path" value="/choose-user-type"/>
+                <input type="hidden" name="_target_path" value="/choose-user-type"/>
 
-			<button class="btn-login" type="submit">Se connecter</button>
-		</form>
+                <button class="btn-login" type="submit">Se connecter</button>
+            </form>
+        </center>
 	</div>
 {% endblock %}
