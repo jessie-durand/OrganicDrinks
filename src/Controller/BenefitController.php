@@ -4,21 +4,33 @@ namespace App\Controller;
 
 use App\Entity\Benefit;
 use App\Form\BenefitType;
+use App\Form\SearchBenefitType;
 use App\Repository\BenefitRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/benefit')]
 class BenefitController extends AbstractController
 {
-    #[Route('/', name: 'benefit_index', methods: ['GET'])]
-    public function index(BenefitRepository $benefitRepository): Response
+    #[Route('/', name: 'benefit_index', methods: ['GET', 'POST'])]
+    public function index(Request $request, BenefitRepository $benefitRepository): Response
     {
+        $form = $this->createForm(SearchBenefitType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $search = $form->getData()['search'];
+            $benefits = $benefitRepository->findBy(['name' => $search]);
+        } else {
+            $benefits = $benefitRepository->findAll();
+        }
+
         return $this->render('benefit/index.html.twig', [
-            'benefits' => $benefitRepository->findAll(),
+            'benefits' => $benefits,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -71,7 +83,7 @@ class BenefitController extends AbstractController
     #[Route('/{id}', name: 'benefit_delete', methods: ['POST'])]
     public function delete(Request $request, Benefit $benefit, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$benefit->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $benefit->getId(), $request->request->get('_token'))) {
             $entityManager->remove($benefit);
             $entityManager->flush();
         }

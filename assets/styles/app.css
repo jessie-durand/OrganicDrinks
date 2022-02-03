@@ -1,3 +1,189 @@
 body {
     background-color: #B1BDA9;
 }
+
+/* CSS de la userBase */
+
+#navUser  {
+   display:flex;
+   justify-content: space-around;
+}
+
+#navUser li {
+    list-style: none;
+    text-decoration: none;
+}
+
+#navUser li a{
+    cursor:pointer;
+}
+
+#logo-login {
+    width:300px;
+}
+
+/* CSS du footer user  */
+
+#footerUser  {
+    display:flex;
+    justify-content: flex-end;
+    gap:80px;
+    margin:2%;
+ }
+
+#footerUser li {
+     list-style: none;
+     text-decoration: none;
+ }
+
+#footerUser li a{
+     cursor:pointer;
+ }
+
+ /* CSS des barres de recherches  */
+
+ .searchbar {
+     display : flex;
+     justify-content: center;
+ }
+
+/* CSS de la homepage */
+
+.homepage {
+    display:flex;
+}
+
+.videoHome {
+    margin:2%;
+}
+
+.textHome {
+    margin:2%;
+}
+
+/* CSS de la page ingredients index */
+
+.lesIngredients {
+    display:flex;
+    justify-content: space-around;
+    flex-wrap : wrap;
+    gap:30px;
+}
+.ingredient {
+    display:flex;
+    flex-direction: column;
+    width: 19%;
+    margin-bottom : 5%;
+}
+
+.ingredient h2 {
+    font-size: 18px;
+}
+
+h2, h1, p {
+    text-align: center;
+}
+.ingredient a {
+    display:flex;
+    justify-content : center;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-size: 18px;
+    border: 1px solid rgb(0, 0, 0);
+    padding: 5px 10px;
+    position: relative;
+    transition: all 1s;
+    overflow: hidden;
+    width:30%;
+}
+
+.ingredient a:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color:rgb(0, 0, 0);
+    z-index: -1;
+    transform: translateX(-100%);
+    transition: all 1s;
+}
+
+.ingredient a:hover:before {
+    transform: translateX(0);
+  }
+
+.ingredient a:hover {
+    color: #ffffff;
+  }
+
+.ingredient img {
+    height: 270px;
+    width: auto;
+    object-fit: cover;
+    cursor:pointer;
+    transition: all 1s;
+}
+
+/* CSS de la page drink index */
+
+.lesdrinks {
+    display:flex;
+    justify-content: space-around;
+    flex-wrap : wrap;
+    gap:30px;
+}
+.drink {
+    display:flex;
+    flex-direction: column;
+    width: 19%;
+    margin-bottom : 5%;
+}
+
+.drink h2 {
+    font-size: 18px;
+}
+
+.drink a {
+    display:flex;
+    justify-content : center;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-size: 18px;
+    border: 1px solid rgb(0, 0, 0);
+    padding: 5px 10px;
+    position: relative;
+    transition: all 1s;
+    overflow: hidden;
+    width:30%;
+}
+
+.drink a:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color:rgb(0, 0, 0);
+    z-index: -1;
+    transform: translateX(-100%);
+    transition: all 1s;
+}
+
+.drink a:hover:before {
+    transform: translateX(0);
+  }
+
+.drink a:hover {
+    color: #ffffff;
+  }
+
+.drink img {
+    height: 270px;
+    width: auto;
+    object-fit: cover;
+    cursor:pointer;
+    transition: all 1s;
+}

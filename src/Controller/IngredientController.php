@@ -4,21 +4,33 @@ namespace App\Controller;
 
 use App\Entity\Ingredient;
 use App\Form\IngredientType;
+use App\Form\SearchIngredientType;
 use App\Repository\IngredientRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/ingredient')]
 class IngredientController extends AbstractController
 {
-    #[Route('/', name: 'ingredient_index', methods: ['GET'])]
-    public function index(IngredientRepository $ingredientRepository): Response
+    #[Route('/', name: 'ingredient_index', methods: ['GET', 'POST'])]
+    public function index(Request $request, IngredientRepository $ingredientRepository): Response
     {
+        $form = $this->createForm(SearchIngredientType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $search = $form->getData()['search'];
+            $ingredients = $ingredientRepository->findBy(['name' => $search]);
+        } else {
+            $ingredients = $ingredientRepository->findAll();
+        }
+
         return $this->render('ingredient/index.html.twig', [
-            'ingredients' => $ingredientRepository->findAll(),
+            'ingredients' => $ingredients,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -71,7 +83,7 @@ class IngredientController extends AbstractController
     #[Route('/{id}', name: 'ingredient_delete', methods: ['POST'])]
     public function delete(Request $request, Ingredient $ingredient, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$ingredient->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $ingredient->getId(), $request->request->get('_token'))) {
             $entityManager->remove($ingredient);
             $entityManager->flush();
         }

@@ -4,21 +4,33 @@ namespace App\Controller;
 
 use App\Entity\Drink;
 use App\Form\DrinkType;
+use App\Form\SearchDrinkType;
 use App\Repository\DrinkRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/drink')]
 class DrinkController extends AbstractController
 {
-    #[Route('/', name: 'drink_index', methods: ['GET'])]
-    public function index(DrinkRepository $drinkRepository): Response
+    #[Route('/', name: 'drink_index', methods: ['GET', 'POST'])]
+    public function index(Request $request, DrinkRepository $drinkRepository): Response
     {
+        $form = $this->createForm(SearchDrinkType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $search = $form->getData()['search'];
+            $drinks = $drinkRepository->findBy(['name' => $search]);
+        } else {
+            $drinks = $drinkRepository->findAll();
+        }
+
         return $this->render('drink/index.html.twig', [
-            'drinks' => $drinkRepository->findAll(),
+            'drinks' => $drinks,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -71,7 +83,7 @@ class DrinkController extends AbstractController
     #[Route('/{id}', name: 'drink_delete', methods: ['POST'])]
     public function delete(Request $request, Drink $drink, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$drink->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $drink->getId(), $request->request->get('_token'))) {
             $entityManager->remove($drink);
             $entityManager->flush();
         }

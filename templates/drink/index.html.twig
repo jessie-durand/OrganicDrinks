@@ -1,39 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Drink index{% endblock %}
+{% block title %}Les boissons{% endblock %}
 
 {% block body %}
-    <h1>Drink index</h1>
+    {% include "userBase.html.twig" %}
+    <h1>Les Boissons</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Image</th>
-                <th>Description</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+
+    {{ form_start(form) }}
+    <div class="searchbar">
+        {{ form_widget(form.search) }}
+        {{ form_help(form.search) }}
+        {{ form_errors(form.search) }}
+        <button id="search" class=""><i class="fas fa-search"></i></button>
+    </div>
+    {{ form_end(form) }}
+
+    <div class="lesdrinks">
         {% for drink in drinks %}
-            <tr>
-                <td>{{ drink.id }}</td>
-                <td>{{ drink.name }}</td>
-                <td>{{ drink.image }}</td>
-                <td>{{ drink.description }}</td>
-                <td>
-                    <a href="{{ path('drink_show', {'id': drink.id}) }}">show</a>
-                    <a href="{{ path('drink_edit', {'id': drink.id}) }}">edit</a>
-                </td>
-            </tr>
+            <div class="drink">
+                <img class="align-self-start mr-3" src="{{drink.image}}" alt="{{ drink.name }} poster">
+                <h2>{{ loop.index }} . {{ drink.name }}</h2>
+                <p class="card-text">{{ drink.description| striptags | slice(0, 180) }} [...] </p>
+                {# Lien vers la fiche drink : #}
+                <center>
+                    <a href="{{ path("drink_show", {'id': drink.id}) }}">Voir plus</a>
+                </center>
+            </div>
         {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
+        Aucune boisson trouvé.
         {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('drink_new') }}">Create new</a>
+    </div>
+    {% include "userFooter.html.twig" %}
 {% endblock %}
