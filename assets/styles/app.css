@@ -481,6 +481,7 @@ h2, h1, p {
     box-shadow : 0px 2px 4px 0px #7B7B7B;
   }
 
+
   .fa-pen:hover, .fa-trash:hover, .fa-eye:hover {
     color: rgb(233, 235, 224);
     background-color: rgb(30, 39, 38);
@@ -497,8 +498,8 @@ h2, h1, p {
     padding:5px;
 }
 
-button, input[type="submit"], input[type="reset"] {
-	background: none;
+.container-tableau button {
+    background: none;
 	color: inherit;
 	border: none;
 	padding: 0;
