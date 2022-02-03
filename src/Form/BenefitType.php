@@ -15,7 +15,7 @@ class BenefitType extends AbstractType
             ->add('name')
             ->add('image')
             ->add('description')
-            ->add('ingredients')
+            // ->add('ingredients')
         ;
     }
 

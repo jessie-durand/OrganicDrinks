@@ -15,8 +15,8 @@ class DrinkType extends AbstractType
             ->add('name')
             ->add('image')
             ->add('description')
-            ->add('ingredients')
-            ->add('categoryDrink')
+            // ->add('ingredients')
+            // ->add('categoryDrink')
         ;
     }
 

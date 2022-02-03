@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Ingredient;
 use App\Form\IngredientType;
+use App\Service\FiltreService;
 use App\Form\SearchIngredientType;
 use App\Repository\IngredientRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -91,6 +92,7 @@ class IngredientController extends AbstractController
 
             return $this->redirectToRoute('ingredient_index_admin', [], Response::HTTP_SEE_OTHER);
         }
+
 
 
         return $this->renderForm('admin/ingredient/edit.html.twig', [

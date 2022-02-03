@@ -1,5 +1,6 @@
 body {
     background-color: #B1BDA9;
+    font-family: 'Montserrat', sans-serif;
 }
 
 /* CSS de la userBase */
@@ -16,6 +17,7 @@ body {
 
 #navUser li a{
     cursor:pointer;
+    text-decoration: none;
 }
 
 #logo-login {
