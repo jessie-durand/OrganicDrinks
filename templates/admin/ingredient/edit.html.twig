@@ -6,13 +6,15 @@
  {% if is_granted("ROLE_ADMIN") %}
 
     <h1>Modifier {{ ingredient.name }}</h1>
+    <div class="container-tableau">
 
-    {{ include('admin/ingredient/_form.html.twig', {'button_label': 'Update'}) }}
+            {{ include('admin/ingredient/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('ingredient_index') }}">Retour</a>
+            <a href="{{ path('ingredient_index_admin') }}">Retour</a>
 
-    {{ include('admin/ingredient/_delete_form.html.twig') }}
-{% else %}
-<p> Vous devez être administrateur pour voir ce contenu ! </p>
+            {{ include('admin/ingredient/_delete_form.html.twig') }}
+        {% else %}
+        <p> Vous devez être administrateur pour voir ce contenu ! </p>
+</div>
 {% endif %}
 {% endblock %}

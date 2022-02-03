@@ -1,34 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Drink{% endblock %}
+{% block title %}Boisson {{ drink.name }}{% endblock %}
 
 {% block body %}
-    <h1>Drink</h1>
+{% include "user/userBase.html.twig" %}
+    <h1>{{ drink.name }}</h1>
+        <div class="ingredientShow">
+            <div class="showBody">
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ drink.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ drink.name }}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                <td>{{ drink.image }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ drink.description }}</td>
-            </tr>
-        </tbody>
-    </table>
+            <img src="{{drink.image}}" alt="{{ drink.name }} poster">
+                <div class="text">
+                    <p>{{ drink.description }}</p>
+                </div>
+                <div class="liens">
+                    <p> Les ingrédients :</p>
+                        {% for ingredient in drink.ingredients %}
+                            <li>
+                                <a href="{{ path('ingredient_show', {'id' : ingredient.id}) }}">
+                                {{ingredient.name}}
+                                </a>
+                            </li>
+                        {% endfor %}
+                </div>
+            </div>
+        </div>
 
-    <a href="{{ path('drink_index') }}">back to list</a>
-
-    <a href="{{ path('drink_edit', {'id': drink.id}) }}">edit</a>
-
-    {{ include('admin/drink/_delete_form.html.twig') }}
+        <center>
+            <div class="btn">
+                <a href="{{ path('ingredient_index') }}">
+                    Retour
+                </a>
+            </div>
+        </center>
+</div>
+{% include "user/userFooter.html.twig" %}
 {% endblock %}

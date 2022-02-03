@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ingredient{% endblock %}
+{% block title %}Ingredient {{ ingredient.name }}{% endblock %}
 
 {% block body %}
 {% include "user/userBase.html.twig" %}
     <h1>{{ ingredient.name }}</h1>
         <div class="ingredientShow">
             <div class="showBody">
-            <img src="{{ingredient.image}}" alt="{{ ingredient.name }} poster">
+                <img src="{{ingredient.image}}" alt="{{ ingredient.name }} poster">
                 <div class="text">
                     <p>{{ ingredient.description }}</p>
                     <strong>Bienfaits :</strong>
@@ -23,7 +23,7 @@
                     <p> Les Boissons :</p>
                         {% for drink in ingredient.drinks %}
                             <li>
-                                <a href="">
+                                <a href="{{ path('drink_show', {'id' : drink.id}) }}">
                                 {{drink.name}}
                                 </a>
                             </li>
@@ -31,11 +31,14 @@
                 </div>
             </div>
         </div>
-          <div class="btn">
+
+        <center>
+            <div class="btn">
                 <a href="{{ path('ingredient_index') }}">
                     Retour
                 </a>
             </div>
+        </center>
 </div>
 {% include "user/userFooter.html.twig" %}
 {% endblock %}

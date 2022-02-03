@@ -6,14 +6,14 @@
     {% include "user/userBase.html.twig" %}
     <h1>Les Bienfaits</h1>
 
+    {{ form_start(form) }}
     <div class="searchbar">
-        {{ form_start(form) }}
         {{ form_widget(form.search) }}
         {{ form_help(form.search) }}
         {{ form_errors(form.search) }}
         <button id="search" class=""><i class="fas fa-search"></i></button>
-        {{ form_end(form) }}
     </div>
+    {{ form_end(form) }}
 
     <div class="lesbenefits">
         {% for benefit in benefits %}
